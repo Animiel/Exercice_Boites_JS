@@ -34,16 +34,21 @@
         const box = document.createElement("div")
         box.classList.add("box")
 
+        const box_box = document.createElement("div")
+        box_box.classList.add("box_box")
+
         const board = document.querySelector("#board")
 
         let nb = 1
         let choix_nb_boites = Number(prompt("Avec combien de boites voulez-vous jouer ?", 10))
-        let choix_difficulte = prompt("Quelle difficulté voulez vous ?", "normale")
+        let choix_difficulte = prompt("Quelle difficulté voulez vous ?", "difficile")
 
         for (let i = 1; i <= choix_nb_boites; i++) {
             const newbox = box.cloneNode()
+            const boxbox = box_box.cloneNode()
             newbox.innerText = i
-            board.appendChild(newbox)
+            board.appendChild(boxbox)
+            boxbox.appendChild(newbox)
 
             newbox.addEventListener("click", function() {
                 //console.log("Boite n°" + i + ", click !")
