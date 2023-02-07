@@ -37,8 +37,9 @@
         const board = document.querySelector("#board")
 
         let nb = 1
+        let choix = Number(prompt("Avec combien de boites voulez-vous jouer ?", 10))
 
-        for (let i = 1; i <= 10; i++) {
+        for (let i = 1; i <= choix; i++) {
             const newbox = box.cloneNode()
             newbox.innerText = i
             board.appendChild(newbox)
@@ -60,6 +61,9 @@
                     board.querySelectorAll(".box-clicked").forEach(function (validBox) {
                         validBox.classList.remove("box-clicked")
                     })
+                    setTimeout(function() {
+                        shuffleChildren(board);
+                    }, 1100)
                 }
                 else {
                     showReaction("notice", newbox)
