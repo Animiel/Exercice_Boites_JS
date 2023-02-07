@@ -8,6 +8,10 @@
     <title>Document</title>
 </head>
 <body>
+    <!--<h2>Temps</h2>
+    <div id="timer">
+        <span class="minutes">00</span><strong> : </strong><span class="secondes">00</span>
+    </div>-->
     <div id="board"></div>
     
     <script>
@@ -31,6 +35,20 @@
             }
         }
 
+        function timer() {
+            var secondes = 0, 
+                minutes = 0;
+            /*Afficher minutes + " : " + secondes*/
+                if (secondes == 60) {
+                    minutes += 1
+                    secondes = 0
+                }
+                else {
+                    secondes++
+                }
+
+        }
+
         const box = document.createElement("div")
         box.classList.add("box")
 
@@ -38,6 +56,8 @@
         box_box.classList.add("box_box")
 
         const board = document.querySelector("#board")
+
+        //const timer = document.querySelector("#timer")
 
         let nb = 1
         let choix_nb_boites = Number(prompt("Avec combien de boites voulez-vous jouer ?", 10))
