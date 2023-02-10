@@ -12,11 +12,11 @@
     <div class="score">
         <h2>Temps</h2>
         <div id="timer">
-            <span class="minutes">00</span><strong> : </strong><span class="secondes">00</span>
+            <span class="minutes">00</span><strong> : </strong><span class="secondes">00</span><button type="button" class="starting">Start</button>
         </div>
         <p>
             Meilleur temps : <span class="tmin">00</span><strong> : </strong><span class="tsec">00</span><br>
-            Meilleur nombre de clics : <span class="nbClic">00</span>
+            Nombre de clics : <span class="nbClic">00</span>
         </p>
     </div>
     
@@ -51,11 +51,9 @@
 
         const board = document.querySelector("#board")
 
-        //const timer = document.querySelector("#timer")
-
         let nb = 1
         let choix_nb_boites = Number(prompt("Avec combien de boites voulez-vous jouer ?", 10))
-        let choix_difficulte = prompt("Quelle difficulté voulez vous ?", "difficile")
+        let choix_difficulte = prompt("Quelle difficulté voulez vous ?", "normale")
 
         for (let i = 1; i <= choix_nb_boites; i++) {
             const newbox = box.cloneNode()
@@ -76,6 +74,7 @@
                     if (nb == board.children.length) {
                         board.querySelectorAll(".box").forEach(function(box) {
                             showReaction("success", box)
+                            board.classList.add("success")
                         })
                     }
                     nb++
@@ -97,15 +96,30 @@
         }
 
         window.onload = function() {
+
+            console.log(sessionStorage)
             var secondes = 00;
             var minutes = 00;
             var modifSecondes = document.querySelector(".secondes");
             var modifMinutes = document.querySelector(".minutes");
-            var start = document.querySelector("#board");
+            var board = document.querySelector("#board");
             var nbClicks = 00;
             var modifNbClic = document.querySelector(".nbClic");
+            var Interval;
+            var start = document.querySelector(".starting");
+            var meilleurMinute = document.querySelector(".tmin");
+            var meilleurSeconde = document.querySelector(".tsec");
+
+            meilleurMinute.innerHTML = sessionStorage.getItem("temps_minutes");
+            meilleurSeconde.innerHTML = sessionStorage.getItem("temps_secondes");
+            console.log(meilleurMinute);
+            console.log(meilleurSeconde);
 
             start.onclick = function() {
+                clearInterval(Interval);
+                Interval = setInterval(timerStart, 1000);
+            }
+            board.onclick = function() {
                 nbClicks += 1;
                 if (nbClicks < 10) {
                 modifNbClic.innerHTML = "0" + nbClicks;
@@ -114,6 +128,31 @@
                     modifNbClic.innerHTML = nbClicks;
                 }
                 console.log(nbClicks);
+                
+                if (board.classList.contains("success")) {
+                    clearInterval(Interval);
+            
+                    if (minutes <= sessionStorage.getItem("temps_minutes")) {
+                        sessionStorage.setItem("temps_minutes", minutes);
+                        if (secondes <= sessionStorage.getItem("temps_secondes")) {
+                            sessionStorage.setItem("temps_secondes", secondes);
+                        }
+                    }
+                    if (minutes < 10) {
+                        meilleurMinute.innerHTML = "0" + sessionStorage.getItem("temps_minutes");
+                    }
+                    if (minutes > 9) {
+                        meilleurMinute.innerHTML = sessionStorage.getItem("temps_minutes");
+                    }
+                    if (secondes < 10) {
+                        meilleurSeconde.innerHTML = "0" + sessionStorage.getItem("temps_secondes");
+                    }
+                    if (secondes > 9) {
+                        meilleurSeconde.innerHTML = sessionStorage.getItem("temps_secondes");
+                    }
+                    console.log(meilleurMinute);
+                    console.log(meilleurSeconde);
+                }
             }
 
             function timerStart() {
@@ -133,7 +172,6 @@
                 console.log(minutes);
                 console.log(secondes);
             }
-
         }
 
         shuffleChildren(board)

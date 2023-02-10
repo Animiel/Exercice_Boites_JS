@@ -15,6 +15,7 @@ h2 {
 }
 
 #timer {
+    display: flex;
     width: auto;
     padding: 3px;
     margin: 5px;
@@ -25,10 +26,26 @@ h2 {
     color: white;
 }
 
+button {
+    font-size: 14px;
+    margin: 3px;
+    background-color: black;
+    color: white;
+    overflow: hidden;
+}
+
+button:hover {
+    cursor: pointer;
+}
+
 p {
     font-size: 18px;
     font-family: 'Lucida Sans', sans-serif;
     margin: 5px;
+}
+
+p span.tmin, p span.tsec {
+    color: rgb(215, 0, 0);
 }
 
 #board {
