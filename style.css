@@ -5,6 +5,7 @@
     flex-flow: column wrap;
     border: black solid 1px;
     border-radius: 20px;
+    width: auto;
 }
 
 h2 {
@@ -22,6 +23,12 @@ h2 {
     border-radius: 20px;
     background-color: rgb(0, 0, 0);
     color: white;
+}
+
+p {
+    font-size: 18px;
+    font-family: 'Lucida Sans', sans-serif;
+    margin: 5px;
 }
 
 #board {

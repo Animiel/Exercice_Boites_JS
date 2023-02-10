@@ -14,6 +14,10 @@
         <div id="timer">
             <span class="minutes">00</span><strong> : </strong><span class="secondes">00</span>
         </div>
+        <p>
+            Meilleur temps : <span class="tmin">00</span><strong> : </strong><span class="tsec">00</span><br>
+            Meilleur nombre de clics : <span class="nbClic">00</span>
+        </p>
     </div>
     
     <div id="board"></div>
@@ -97,26 +101,39 @@
             var minutes = 00;
             var modifSecondes = document.querySelector(".secondes");
             var modifMinutes = document.querySelector(".minutes");
+            var start = document.querySelector("#board");
+            var nbClicks = 00;
+            var modifNbClic = document.querySelector(".nbClic");
 
-            //newbox.addEventListener("click", function() {
-                setInterval(function() {
-                    secondes++;
-                    if (secondes < 10) {
-                        modifSecondes.innerHTML = "0" + secondes;
-                    }
-                    if (secondes > 9 || secondes == 0) {
-                        modifSecondes.innerHTML = secondes;
-                    }
-                    if (secondes > 59) {
-                        secondes = 0;
-                        minutes += 1;
-                        modifMinutes.innerHTML = "0" + minutes;
-                        modifSecondes.innerHTML = "0" + secondes;
-                    }
-                    console.log(minutes);
-                    console.log(secondes);
-                }, 1000)
-            //})
+            start.onclick = function() {
+                nbClicks += 1;
+                if (nbClicks < 10) {
+                modifNbClic.innerHTML = "0" + nbClicks;
+                }
+                if (nbClicks > 9) {
+                    modifNbClic.innerHTML = nbClicks;
+                }
+                console.log(nbClicks);
+            }
+
+            function timerStart() {
+                secondes++;
+                if (secondes < 10) {
+                    modifSecondes.innerHTML = "0" + secondes;
+                }
+                if (secondes > 9 || secondes == 0) {
+                    modifSecondes.innerHTML = secondes;
+                }
+                if (secondes > 59) {
+                    secondes = 0;
+                    minutes += 1;
+                    modifMinutes.innerHTML = "0" + minutes;
+                    modifSecondes.innerHTML = "0" + secondes;
+                }
+                console.log(minutes);
+                console.log(secondes);
+            }
+
         }
 
         shuffleChildren(board)
