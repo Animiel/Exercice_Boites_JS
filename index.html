@@ -8,10 +8,14 @@
     <title>Document</title>
 </head>
 <body>
-    <!--<h2>Temps</h2>
-    <div id="timer">
-        <span class="minutes">00</span><strong> : </strong><span class="secondes">00</span>
-    </div>-->
+    
+    <div class="score">
+        <h2>Temps</h2>
+        <div id="timer">
+            <span class="minutes">00</span><strong> : </strong><span class="secondes">00</span>
+        </div>
+    </div>
+    
     <div id="board"></div>
     
     <script>
@@ -33,20 +37,6 @@
                     clickedBox.classList.remove(type);
                 }, 800)
             }
-        }
-
-        function timer() {
-            var secondes = 0, 
-                minutes = 0;
-            /*Afficher minutes + " : " + secondes*/
-                if (secondes == 60) {
-                    minutes += 1
-                    secondes = 0
-                }
-                else {
-                    secondes++
-                }
-
         }
 
         const box = document.createElement("div")
@@ -100,6 +90,33 @@
                     showReaction("notice", newbox)
                 }
             })
+        }
+
+        window.onload = function() {
+            var secondes = 00;
+            var minutes = 00;
+            var modifSecondes = document.querySelector(".secondes");
+            var modifMinutes = document.querySelector(".minutes");
+
+            //newbox.addEventListener("click", function() {
+                setInterval(function() {
+                    secondes++;
+                    if (secondes < 10) {
+                        modifSecondes.innerHTML = "0" + secondes;
+                    }
+                    if (secondes > 9 || secondes == 0) {
+                        modifSecondes.innerHTML = secondes;
+                    }
+                    if (secondes > 59) {
+                        secondes = 0;
+                        minutes += 1;
+                        modifMinutes.innerHTML = "0" + minutes;
+                        modifSecondes.innerHTML = "0" + secondes;
+                    }
+                    console.log(minutes);
+                    console.log(secondes);
+                }, 1000)
+            //})
         }
 
         shuffleChildren(board)
