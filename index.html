@@ -110,6 +110,7 @@
             var meilleurMinute = document.querySelector(".tmin");
             var meilleurSeconde = document.querySelector(".tsec");
 
+            //j'ai essayé de régler l'affichage lors d'un recommencement de partie sur 2 digits mais ça ne fonctionne pas : en utilisant .length < 2, le meilleur temps ne s'affiche plus et le chrono ne fonctionne plus.
             meilleurMinute.innerHTML = sessionStorage.getItem("temps_minutes");
             meilleurSeconde.innerHTML = sessionStorage.getItem("temps_secondes");
             console.log(meilleurMinute);
@@ -132,9 +133,9 @@
                 if (board.classList.contains("success")) {
                     clearInterval(Interval);
             
-                    if (minutes <= sessionStorage.getItem("temps_minutes")) {
+                    if (minutes <= sessionStorage.getItem("temps_minutes") || sessionStorage.getItem("temps_minutes") == null) {
                         sessionStorage.setItem("temps_minutes", minutes);
-                        if (secondes <= sessionStorage.getItem("temps_secondes")) {
+                        if (secondes <= sessionStorage.getItem("temps_secondes") || sessionStorage.getItem("temps_secondes") == null) {
                             sessionStorage.setItem("temps_secondes", secondes);
                         }
                     }
